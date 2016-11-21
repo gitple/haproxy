@@ -12,7 +12,7 @@
     "tune.zlib.memlevel", "tune.zlib.windowsize", "uid", "ulimit-n",
     "unix-bind", "ssl-server-verify", "max-spread-checks", "maxsessrate",
     "maxsslrate", "nogetaddrinfo", "tune.idletimer", "tune.ssl.force-private-cache",
-    "tune.ssl.default-dh-param"
+    "tune.ssl.default-dh-param", "ssl-default-bind-options", "ssl-default-bind-ciphers"
   ],
   "24": [
     "bind", "capture cookie", "capture request header", "capture response header",
