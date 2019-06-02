@@ -291,6 +291,44 @@ HAProxy.prototype.enable = function enable(backend, server, fn) {
 };
 
 /**
+ * Set the server state to [ready / main / drain]
+ *
+ * @param {String} backend Name of the backend server.
+ * @param {String} server The server that needs to be disabled in the backend.
+ * @param {String} newState new state for the server [ ready / maint /drain ]
+ * @param {Function} fn Callback.
+ * @api public
+ */
+HAProxy.prototype.setServerState = function setServerState(backend, server, newState, fn) {
+  return this.send('set server %s/%s state %s', backend || '', server || '', newState || '').call(fn);
+};
+
+/**
+ * Set the server address and port
+ *
+ * @param {String} backend Name of the backend server.
+ * @param {String} server The server that needs to be disabled in the backend.
+ * @param {String} addr The server address
+ * @param {String} port The server port number
+ * @param {Function} fn Callback.
+ * @api public
+ */
+HAProxy.prototype.setServerAddress = function setServerAddress(backend, server, addr, port, fn) {
+  return this.send('set server %s/%s addr %s port %s', backend || '', server || '', addr || '', port || 0).call(fn);
+};
+
+/**
+ * Dumps information about the servers
+ *
+ * @param {Function} fn Callback.
+ * @api public
+ */
+HAProxy.prototype.showServersState = function showServersState(fn) {
+  return this.send('show servers state').using('string').call(fn);
+};
+
+
+/**
  * Mark the frontend as temporarilty stopped. This corresponds to the mode which
  * is used during a soft restart. THe frontend releases the port but it can be
  * enabled again if needed.
